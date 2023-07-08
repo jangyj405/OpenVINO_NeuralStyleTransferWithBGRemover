@@ -1,0 +1,2 @@
+# OpenVINO_NeuralStyleTransferWithBGRemover
+ OpenVINO_miniproject

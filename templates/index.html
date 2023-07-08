@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+<body>
+    <input type="file" id="filechooser" accept=".jpg,.jpeg,.png">
+    <input type="file" id="image" accept=".jpg,.jpeg,.png">
+    <input type="number" id="style">
+    <input type="number" id="bg">
+    <button onclick="uploadFile()">submit</button>
+</body>
+
+<script>
+    var imageFile;
+    document.getElementById("filechooser").addEventListener('change',function(event){
+	    imageFile = event.target.files[0];
+        console.log(imageFile)
+    })
+    // $("#filechooser").on("change", function(event){
+	//     imageFile = event.target.files[0];
+    // });
+    function upload(){
+        element_img = document.getElementById("image")
+        element_style = document.getElementById("style")
+        element_bg = document.getElementById("bg")
+        
+        console.log(element_img.value)
+    }
+
+    function uploadFile() {
+        var blobFile = $('#filechooser')[0].files[0];
+        var formData = new FormData();
+        console.log(blobFile)
+        formData.append("fileToUpload", blobFile);
+        
+        $.ajax({
+           url: "/upload",
+           type: "POST",
+           data: formData,
+           processData: false,
+           contentType: false,
+           success: function(response) {
+               // .. do something
+           },
+           error: function(jqXHR, textStatus, errorMessage) {
+               console.log(errorMessage); // Optional
+           }
+        });
+    }
+</script>

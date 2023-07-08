@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>
+            Neural Style Transfer w/ BG Remover
+        </title>
+    </head>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="../static/js/main.js"></script>
+    <body>
+        <style>
+            body{
+                overflow-x: hidden;
+            }
+            h1{
+                color: green;
+                text-align: center;
+            }
+            #mainImage{
+    
+                width: 100%;
+                text-align: center;
+                
+            }
+            #data{
+                width: 100%;
+                text-align: center;
+            }
+            ul{
+                list-style-type: none;
+            }
+            
+            
+        </style>
+        <h1>
+            Neural Style Transfer<br> with BG Remover</Style>!<br>
+            TestPage
+        </h1>
+        <div id="mainImage" >
+            <img id="previewImage" alt="main image" src="../static/sample_data/lena.jpg" width="180" height="180">
+        </div>
+        <div style="display: block;" id="data">
+            <div style="display: block;"> 
+                Select File to Upload<br>
+                <input type="file" onchange="encodeImageFileAsURL(this)" id="filechooser" accept=".jpg,.jpeg,.png">
+            </div>
+            <div style="align-items: center;">
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="Mosaic" class="sampleImage"  src="../static/sample_style/mosaic.png" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="0" name="styleRadio" checked> Mosaic
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="RAIN-PRINCESS" class="sampleImage"  src="../static/sample_style/rain-princess.png" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="1"  name="styleRadio"> RAIN-PRINCESS
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="CANDY" class="sampleImage"  src="../static/sample_style/candy.png" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="2"  name="styleRadio"> CANDY
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="UDNIE" class="sampleImage"  src="../static/sample_style/udnie.png" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="3"  name="styleRadio"> UDNIE
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="POINTILISM" class="sampleImage"  src="../static/sample_style/pointilism.png" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="4"  name="styleRadio"> POINTILISM
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="main image" class="sampleImage" src="../static/bg_sources/bg0.jpg" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="0"  name="bgRadio" checked> BG0
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="main image" class="sampleImage"  src="../static/bg_sources/bg1.jpg" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio"  value="1" name="bgRadio"> BG1
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="main image" class="sampleImage"  src="../static/bg_sources/bg2.jpg" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="2"  name="bgRadio"> BG2
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="main image" class="sampleImage"  src="../static/bg_sources/bg3.jpg" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio"  value="3" name="bgRadio"> BG3
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <img alt="main image" class="sampleImage"  src="../static/bg_sources/bg4.jpg" width="180" height="180">
+                                        </li>
+                                        <li>
+                    
+                                            <label> 
+                                                <input type="radio" value="4"  name="bgRadio"> BG4
+                                            </label>
+                                        </li>
+                                    </ul>
+                                                    
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+            </div>
+            <div>
+                <button style="width: 100px; height: 30px;" onclick="for_test()">submit</button>
+            </div>
+            
+            
+        </div>
+        <div id="waitingPage" style="visibility: hidden; text-align: center; position: absolute; left: 0; top: 0; z-index: 100; width: 100%; height: 100%; background-color: beige;">
+            <h1 style="opacity: 100%; color: black;">
+                Wait for Server...
+            </h1>
+            <h1 id="timelog" style="opacity: 100%; color: black;">
+                0 seconds
+            </h1>
+        </div>
+        
+        <div id="resultPage" style="justify-content: center; align-items: center; display: block; visibility: hidden; text-align: center; position: absolute; left: 0; top: 0; z-index: 100; width: 100%; height: 100%; background-color: beige;">
+            <h1 style="opacity: 100%; color: black;">
+                Result!
+            </h1>
+            <h4>
+                Click image to download
+            </h4>
+            <div  style="position: absolute; left: 10%; width: 80%; height: 80%; align-items: center;">
+                <img onclick="download_file()" id="resultImage">
+            </div>
+            <!--
+            <div  style="position: absolute; left: 10%; width: 80%; height: 80%; align-items: center;">
+                <img onclick="download_file()" width="100%" height="100%" id="resultImage">
+            </div>
+            -->
+        </div>
+    </body>
+</html>
