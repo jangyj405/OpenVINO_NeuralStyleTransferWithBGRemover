@@ -43,7 +43,7 @@ class AIProcessor():
         compiled_model = self.ie.compile_model(model=model, device_name='AUTO')
         return compiled_model
 
-    def callback_bgr(userdata):
+    def callback_bgr(self ,userdata):
         print('inside bgr callback')
         req, origin, bg, styler, task_result = userdata
         res = req.get_output_tensor(0).data[0]
@@ -55,13 +55,13 @@ class AIProcessor():
         output_layer = compiled_model.output(0)
         req_style = compiled_model.create_infer_request()
         req_style.set_tensor(input_layer, ov.Tensor(img))
-        req_style.set_callback(callback = AIProcessor.callback_styler, userdata = (req_style, origin, task_result))
+        req_style.set_callback(callback = self.callback_styler, userdata = (req_style, origin, task_result))
         req_style.start_async()
 
     
 
 
-    def callback_styler(userdata):
+    def callback_styler(self, userdata):
         print('inside styler callback')
         req, image, task_result = userdata
         res = req.get_output_tensor(0).data[0]
@@ -82,7 +82,7 @@ class AIProcessor():
 
         req_bgr = self.bg_remover.create_infer_request()
         req_bgr.set_tensor(input_layer_bg_remover, ov.Tensor(input_image))
-        req_bgr.set_callback(callback = AIProcessor.callback_bgr, 
+        req_bgr.set_callback(callback = self.callback_bgr, 
                              userdata = (req_bgr, image, self.bg_pool.get_bg(bg), self.style_transfers[style], task_result))
         #req_bgr.set_callback(callback = local_callback_bgr, userdata=(req_bgr, image))
         req_bgr.start_async()
