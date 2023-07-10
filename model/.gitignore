@@ -1,0 +1,6 @@
+__pycache__
+u2net_lite/
+*.onnx
+*.pth
+*.bin
+*.xml
