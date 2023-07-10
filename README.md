@@ -4,38 +4,72 @@
 Intel Edge AI SW Developer @ kccistc<br>
 http://www.kccistc.net/
 
-## installation
+## Requirement
 
-    pip install -U pip
-    pip install -r requirements.txt
-    python model_downloaders.py
+```
+* 9th generation Intel® CoreTM processor onwards
+* At least 32GB RAM
+* Windows 10
+* Python 3.9
+```
 
-## run
+## Clone code
 
-    python flask_app.py
+```shell
+git clone https://github.com/jangyj405/OpenVINO_NeuralStyleTransferWithBGRemover
+```
 
+## Prerequite
+
+```shell
+python -m venv .venv
+.venv\Scripts\activate
+
+cd OpenVINO_NeuralStyleTransferWithBGRemover
+python -m pip install -U pip
+python -m pip install -r requirements.txt
+python model_downloaders.py
+```
+
+## Steps to run
+
+```shell
+.venv\bin\activate
+cd OpenVINO_NeuralStyleTransferWithBGRemover
+python flask_app.py
+```
+Open "http://127.0.0.1:5000" in your browser
+## Output
+
+![./figures/output0.jpg](./figures/output0.jpg)
+
+Upload your image and click the "submit" button
+
+![./figures/output1.jpg](./figures/output1.jpg)
+
+# Appendix
 ## Concept
-![Alt text](figures/concept.jpg)
+![figures/concept.jpg](figures/concept.jpg)
 
 ## BG Remover
-![Alt text](figures/bg_remover.jpg)
+![figures/bg_remover.jpg](figures/bg_remover.jpg)
 OpenVINO Notebooks 205-vision-background-removal<br>
 U2-Net : https://github.com/xuebinqin/U-2-Net
 
 ## Neural Style Transfer
 OpenVINO Notebooks 404-style-transfer-webcam<br>
 https://github.com/onnx/models/tree/main/vision/style_transfer/fast_neural_style
-![Alt text](figures/neural_style_transfer.jpg)
+![figures/neural_style_transfer.jpg](figures/neural_style_transfer.jpg)
 
 ## Server
-![Alt text](figures/server.jpg)
+![figures/server.jpg](figures/server.jpg)
 
 ## OpenVINO Async API
 OpenVINO Notebooks 115-async-api
-![Alt text](figures/async_api.jpg)
+![figures/async_api.jpg](figures/async_api.jpg)
 
 ## Class AIProcessor
-![Alt text](figures/ai_processor.jpg)
+![figures/ai_processor.jpg](figures/ai_processor.jpg)
 
 ## Conclusion
-![Alt text](figures/conclusion.jpg)
+![figures/conclusion.jpg](figures/conclusion.jpg)
