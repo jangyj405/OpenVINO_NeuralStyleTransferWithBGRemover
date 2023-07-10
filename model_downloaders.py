@@ -22,9 +22,10 @@ def download_style_transfers():
 
     # Selected ONNX model will be downloaded in the path
     for s in styles:
-        model_path = Path(base_model_dir,f"{s.lower()}-9.onnx")
+        model_path = Path(f"{s.lower()}-9.onnx")
         if not model_path.exists():
             style_url = f"{base_url}/{model_path}"
+            style_url = style_url.replace("\\", "/")
             print(f'start: download {s} model from {style_url}')
             download_file(style_url, directory=base_model_dir)
             print(f'end: download {s} model from {style_url}')
